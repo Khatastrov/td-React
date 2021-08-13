@@ -1,27 +1,15 @@
 import React, { Fragment, useState } from 'react';
-import { Form } from './Form';
-import { List } from './List';
+import Pouet from './Pouet';
 
 const App = () => {
   
-  const [users, setUsers] = useState([
-      { nom: "Pierre", id: "1" },
-      { nom: "Paul", id: "2" },
-      { nom: "Jacques", id: "3" },
-    ]);
-
-  const addUser = (user) => {
-    setUsers([...users, user])
-  };
-
-  const removeUser = (id) => {
-    setUsers(users.filter(user => user.id !== id));
-  }
+  const [shouldAppear, setshouldAppear] = useState(false);
+  const el = shouldAppear ? <Pouet /> : <div>Nope.</div>
 
     return (
       <Fragment>
-        <Form handleSubmit={addUser} />
-        <List users={users} handleDelete={removeUser} />
+        <button onClick={() => {setshouldAppear(!shouldAppear)}}>Toggle</button>
+        {el}
       </Fragment>
     )
 }
