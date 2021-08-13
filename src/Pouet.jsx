@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
 
 const Pouet = () => {
-  const [countOne, setCountOne] = useState(0);
+  const [countOne, setCountOne] = useState(10);
   const [countTwo, setCountTwo] = useState(0);
 
 
   useEffect(() => {
+    // on component mount & only if countOne is modified
     document.title = `${countOne} bouteille(s) de bière`;
   }, [countOne]);
 
   useEffect(() => {
-    //everything here is rendered on component mount
+    // on component mount
     console.log("Ah! Création B) ");
     return () => {
-      //everything here is rendered on component unmount
+      // on component unmount
       console.log("Mah... destruction ! ._.");
     }
   }, [])
@@ -25,7 +26,8 @@ const Pouet = () => {
         <div>
           {countOne}
           <button onClick={() => { setCountOne(countOne +1) }}>+</button>
-          <button onClick={() => { setCountOne(countOne-1) }}>-</button>
+          <button onClick={() => { setCountOne(countOne > 1 ? countOne-1 : 1) }}>-</button>
+          {countOne <= 1 ? <p>(Une bière c'est le minimum syndical.)</p> : null}
         </div>
         <div>
           {countTwo}
